@@ -6,6 +6,7 @@
         string TravelerCollectionName { get; set; }
         string TravelAgentCollectionName { get; set; }
         string BackOfficerCollectionName { get; set; }
+        string ReservationCollectionName { get; set; }
         string ConnectionString { get; set; }
         string DatabaseName { get; set; }
         
