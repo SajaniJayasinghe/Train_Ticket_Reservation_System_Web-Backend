@@ -1,6 +1,7 @@
 ﻿using MongoDB.Driver;
 using Train_Reservation_System.Database;
 using Train_Reservation_System.Models.Trains;
+using Train_Reservation_System.Services.Reservations;
 
 namespace Train_Reservation_System.Services.Trains
 
@@ -8,11 +9,16 @@ namespace Train_Reservation_System.Services.Trains
     public class TrainService : ITrainService
     {
         private readonly IMongoCollection<Train> _trains;
-        
-        public TrainService(IDatabaseSettings settings, IMongoClient mongoClient)
+        private readonly IReservationService reservationService;
+
+
+
+        public TrainService(IDatabaseSettings settings, IMongoClient mongoClient, IReservationService reservationService)
         {
             var database = mongoClient.GetDatabase(settings.DatabaseName);
             _trains = database.GetCollection<Train>(settings.TrainCollectionName);
+
+            this.reservationService = reservationService;
         }
         public Train Create(Train train)
         {
@@ -30,22 +36,19 @@ namespace Train_Reservation_System.Services.Trains
             return _trains.Find(train => train.Id == id).FirstOrDefault();
         }
 
-        //public void Remove(string id)
-        //{
-        //    int reservationCount = reservationService.GetByTrain(id);
-        //    // Check if there are any reservations for this train
-        //    if (reservationCount > 0)
-        //    {
-        //        throw new Exception("Cannot delete a train with existing reservations.");
-        //    }
-
-        //    _trains.DeleteOne(train => train.Id == id);
-        //}
-
         public void Remove(string id)
         {
+            int reservationcount = reservationService.GetByTrain(id);
+            // check if there are any reservations for this train
+            if (reservationcount > 0)
+            {
+                throw new Exception("cannot delete a train with existing reservations.");
+            }
+
             _trains.DeleteOne(train => train.Id == id);
         }
+
+       
 
         public void Update(string id, Train train)
         {

@@ -1,26 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "/Users/sajani/Documents/SLIIT Assignment/4 th Year/2 Semester/EAD/Train_Ticket_Reservation_System_Web-Backend/Train Reservation System/Train Reservation System/Train Reservation System.csproj": {}
+    "E:\\4 th year 2 sem\\Train_Ticket_Reservation_System_Web-Backend\\Train Reservation System\\Train Reservation System\\Train Reservation System.csproj": {}
   },
   "projects": {
-    "/Users/sajani/Documents/SLIIT Assignment/4 th Year/2 Semester/EAD/Train_Ticket_Reservation_System_Web-Backend/Train Reservation System/Train Reservation System/Train Reservation System.csproj": {
+    "E:\\4 th year 2 sem\\Train_Ticket_Reservation_System_Web-Backend\\Train Reservation System\\Train Reservation System\\Train Reservation System.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/sajani/Documents/SLIIT Assignment/4 th Year/2 Semester/EAD/Train_Ticket_Reservation_System_Web-Backend/Train Reservation System/Train Reservation System/Train Reservation System.csproj",
+        "projectUniqueName": "E:\\4 th year 2 sem\\Train_Ticket_Reservation_System_Web-Backend\\Train Reservation System\\Train Reservation System\\Train Reservation System.csproj",
         "projectName": "Train Reservation System",
-        "projectPath": "/Users/sajani/Documents/SLIIT Assignment/4 th Year/2 Semester/EAD/Train_Ticket_Reservation_System_Web-Backend/Train Reservation System/Train Reservation System/Train Reservation System.csproj",
-        "packagesPath": "/Users/sajani/.nuget/packages/",
-        "outputPath": "/Users/sajani/Documents/SLIIT Assignment/4 th Year/2 Semester/EAD/Train_Ticket_Reservation_System_Web-Backend/Train Reservation System/Train Reservation System/obj/",
+        "projectPath": "E:\\4 th year 2 sem\\Train_Ticket_Reservation_System_Web-Backend\\Train Reservation System\\Train Reservation System\\Train Reservation System.csproj",
+        "packagesPath": "C:\\Users\\DELL\\.nuget\\packages\\",
+        "outputPath": "E:\\4 th year 2 sem\\Train_Ticket_Reservation_System_Web-Backend\\Train Reservation System\\Train Reservation System\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/sajani/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\DELL\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
-          "/usr/local/share/dotnet/sdk/7.0.308/Sdks/Microsoft.NET.Sdk.Web/library-packs": {},
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -75,7 +76,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.308/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     }

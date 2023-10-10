@@ -2,6 +2,7 @@ using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 using Train_Reservation_System.Database;
 using Train_Reservation_System.Services.BackOfficers;
+using Train_Reservation_System.Services.Reservations;
 using Train_Reservation_System.Services.Trains;
 using Train_Reservation_System.Services.TravelAgents;
 using Train_Reservation_System.Services.Travelers;
@@ -24,6 +25,7 @@ builder.Services.AddScoped<ITrainService, TrainService>();
 builder.Services.AddScoped<ITravelerService, TravelerService>();
 builder.Services.AddScoped<ITravelAgentService, TravelAgentService>();
 builder.Services.AddScoped<IBackOfficerService, BackOfficerService>();
+builder.Services.AddScoped<IReservationService, ReservationService>();
 
 // Configure CORS
 builder.Services.AddCors(options =>
