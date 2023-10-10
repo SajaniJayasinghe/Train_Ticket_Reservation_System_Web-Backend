@@ -17,6 +17,9 @@ namespace Train_Reservation_System.Models.Trains
         [BsonElement("trainNumber")]
         public string TrainNumber { get; set; } = "Train Number";
 
+        [BsonElement("trainStartTime")]
+        public string TrainStartTime { get; set; } = "Train Start Time";
+
         [BsonElement("stations")]
         public Station[]? Stations { get; set; }
 
