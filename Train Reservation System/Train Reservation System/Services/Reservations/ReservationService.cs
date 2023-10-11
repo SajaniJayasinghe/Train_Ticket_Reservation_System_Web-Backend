@@ -70,11 +70,11 @@ namespace Train_Reservation_System.Services.Reservations
             int sum = 0;
             foreach(var seat in reservedSeatsCountArray)
             {
-                sum += (int)seat.NumberOfSeats;
+                sum += seat.NumberOfSeats;
 
             }
 
-            return (int)sum;
+            return sum;
         }
 
 
