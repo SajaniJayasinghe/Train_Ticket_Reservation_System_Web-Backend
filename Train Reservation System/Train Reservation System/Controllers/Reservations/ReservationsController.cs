@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MongoDB.Driver;
 using System.Diagnostics;
 using Train_Reservation_System.Models.Reservations;
 using Train_Reservation_System.Models.Trains;
@@ -62,39 +63,39 @@ namespace Train_Reservation_System.Controllers.Reservations
                 {
                     return BadRequest("Maximum 4 reservations allowed per NIC.");
                 }
-                Console.WriteLine(reservation.FromStation);
-                // Perform train filtering based on fromStation, toStation, reservationDate
-                string fromStation = reservation.FromStation;
-                string toStation = reservation.ToStation;
-                DateTime reservationDate = reservation.ReservationDate;
+                //Console.WriteLine(reservation.FromStation);
+                //// Perform train filtering based on fromStation, toStation, reservationDate
+                //string fromStation = reservation.FromStation;
+                //string toStation = reservation.ToStation;
+                //DateTime reservationDate = reservation.ReservationDate;
 
-                // Log before calling FilterTrainsAndCalculateAvailabilityAndFee
-                Console.WriteLine("Before calling FilterTrainsAndCalculateAvailabilityAndFee");
+                //// Log before calling FilterTrainsAndCalculateAvailabilityAndFee
+                //Console.WriteLine("Before calling FilterTrainsAndCalculateAvailabilityAndFee");
 
-                // Call FilterTrainsAndCalculateAvailabilityAndFee
-                List<Train> filteredTrains = reservationService.FilterTrainsAndCalculateAvailabilityAndFee(
-                    fromStation, toStation, reservationDate);
+                //// Call FilterTrainsAndCalculateAvailabilityAndFee
+                //List<Train> filteredTrains = reservationService.FilterTrainsAndCalculateAvailabilityAndFee(
+                //    fromStation, toStation, reservationDate);
 
-                // Log after calling FilterTrainsAndCalculateAvailabilityAndFee
-                Console.WriteLine("After calling FilterTrainsAndCalculateAvailabilityAndFee");
+                //// Log after calling FilterTrainsAndCalculateAvailabilityAndFee
+                //Console.WriteLine("After calling FilterTrainsAndCalculateAvailabilityAndFee");
 
 
-                // Log the filtered trains for debugging purposes
-                Console.WriteLine("Filtered Trains:");
-                foreach (var train in filteredTrains)
-                {
-                    Console.WriteLine($"Train ID: {train.Id}, Train Name: {train.TrainName}, Available Seats: {train.TrainSeats}, Fee: {train.Fee}");
-                }
+                //// Log the filtered trains for debugging purposes
+                //Console.WriteLine("Filtered Trains:");
+                //foreach (var train in filteredTrains)
+                //{
+                //    Console.WriteLine($"Train ID: {train.Id}, Train Name: {train.TrainName}, Available Seats: {train.TrainSeats}, Fee: {train.Fee}");
+                //}
 
-                // Check if a train is selected by the user (you need to implement this logic)
-                if (string.IsNullOrWhiteSpace(reservation.Train))
-                {
-                    return BadRequest("Please select a train.");
-                }
+                //// Check if a train is selected by the user (you need to implement this logic)
+                ////if (string.IsNullOrWhiteSpace(reservation.Train))
+                ////{
+                ////    return BadRequest("Please select a train.");
+                ////}
 
-                // If a train is selected, create the reservation
+                //// If a train is selected, create the reservation
                 reservationService.Create(reservation);
-                return CreatedAtAction(nameof(Get), new { id = reservation.Id },  filteredTrains);
+                return CreatedAtAction(nameof(Get), new { id = reservation.Id }, reservation);
             }
             catch (Exception ex)
             {
@@ -103,6 +104,28 @@ namespace Train_Reservation_System.Controllers.Reservations
                 return StatusCode(500, "An error occurred while creating the reservation.");
             }
         }
+
+        [HttpGet("filterTrains")]
+        public ActionResult<List<Train>> FilterTrainsAndCalculateAvailabilityAndFee(
+     [FromQuery] string fromStation,
+     [FromQuery] string toStation,
+     [FromQuery] DateTime reservationDate)
+
+
+        {
+            try
+            {
+                reservationDate = reservationDate.Date;
+                var filteredTrains = reservationService.FilterTrainsAndCalculateAvailabilityAndFee(fromStation, toStation, reservationDate);
+                return Ok(filteredTrains);
+            }
+            catch (Exception ex)
+            {
+                // Handle exceptions and return an appropriate error response
+                return StatusCode(500, "An error occurred: " + ex.Message);
+            }
+        }
+
 
 
 
