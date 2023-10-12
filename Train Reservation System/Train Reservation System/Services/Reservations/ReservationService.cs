@@ -53,32 +53,111 @@ namespace Train_Reservation_System.Services.Reservations
             return (int)count;
         }
         // Method to get the count of reserved seats for a specific train on a given date
+        //public int GetReservedSeatsCount(string trainId, DateTime reservationDate)
+        //{
+        //    reservationDate = reservationDate.Date;
+        //    var filterBuilder = Builders<Reservation>.Filter;
+
+        //    // Create a filter to match the trainId
+        //    var trainFilter = filterBuilder.Eq(reservation => reservation.Train, trainId);
+
+        //    var dateFilter = filterBuilder.Eq(reservation => reservation.ReservationDate, reservationDate);
+
+
+        //    // Combine the train and date filters
+        //    var combinedFilter = filterBuilder.And(trainFilter, dateFilter);
+
+        //    var reservedSeatsCountArray = _reservations.Find(combinedFilter).ToList();
+        //    int sum = 0;
+        //    foreach(var seat in reservedSeatsCountArray)
+        //    {
+        //        sum += seat.NumberOfSeats;
+
+        //    }
+
+        //    return sum;
+        //}
+
+
+        // Method to filter trains, calculate available seats, and calculate train fee per person
+        //public List<Train> FilterTrainsAndCalculateAvailabilityAndFee(string fromStation, string toStation, DateTime reservationDate)
+        //{
+        //    var filter = Builders<Train>.Filter
+        //        .ElemMatch(train => train.Stations, station => station.StationName == fromStation)
+        //        & Builders<Train>.Filter
+        //        .ElemMatch(train => train.Stations, station => station.StationName == toStation)
+        //        & Builders<Train>.Filter.Eq(train => train.IsActive, true);
+
+        //    var availableTrains = _trains.Find(filter).ToList();
+
+        //    foreach (var train in availableTrains)
+        //    {
+        //        var fromIndex = Array.FindIndex(train.Stations, station => station.StationName == fromStation);
+        //        var toIndex = Array.FindIndex(train.Stations, station => station.StationName == toStation);
+
+        //        if (fromIndex != -1 && toIndex != -1 && fromIndex < toIndex)
+        //        {
+        //            reservationDate = reservationDate.Date;
+        //            var reservedSeats = GetReservedSeatsCount(train.Id, reservationDate);
+        //            var availableSeats = train.TrainSeats - reservedSeats;
+        //            train.TrainSeats = availableSeats;
+
+        //            // Calculate train fee
+        //            var unitPrice = train.UnitPrice;
+        //            var fee = (toIndex - fromIndex) * unitPrice;
+        //            train.Fee = fee;
+        //        }
+        //        else
+        //        {
+        //            train.TrainSeats = 0; // No available seats if "from" station is after "to" station
+        //        }
+        //    }
+
+        //    // Filter trains with available seats
+        //    var filteredTrains = availableTrains.Where(train => train.TrainSeats > 0).ToList();
+
+        //    return filteredTrains;
+        //}
+
+        // Modified GetReservedSeatsCount service
         public int GetReservedSeatsCount(string trainId, DateTime reservationDate)
         {
+            reservationDate = reservationDate.Date;
             var filterBuilder = Builders<Reservation>.Filter;
 
             // Create a filter to match the trainId
             var trainFilter = filterBuilder.Eq(reservation => reservation.Train, trainId);
 
             var dateFilter = filterBuilder.Eq(reservation => reservation.ReservationDate, reservationDate);
-            
 
             // Combine the train and date filters
             var combinedFilter = filterBuilder.And(trainFilter, dateFilter);
 
+            // Find all reservations for the selected train and date
             var reservedSeatsCountArray = _reservations.Find(combinedFilter).ToList();
-            int sum = 0;
-            foreach(var seat in reservedSeatsCountArray)
-            {
-                sum += seat.NumberOfSeats;
 
+            int totalReservedSeats = 0;
+
+            foreach (var seat in reservedSeatsCountArray)
+            {
+                totalReservedSeats += seat.NumberOfSeats;
             }
 
-            return sum;
+            // Find the total seats available on the train
+            var train = _trains.Find(t => t.Id == trainId).FirstOrDefault();
+            int totalTrainSeats = train != null ? train.TrainSeats : 0;
+
+            // Calculate available seats by subtracting reserved seats from total seats
+            int availableSeats = totalTrainSeats - totalReservedSeats;
+
+            // Update the available seats in the train document
+            var updateDefinition = Builders<Train>.Update.Set(t => t.AvailableSeats, availableSeats);
+            _trains.UpdateOne(t => t.Id == trainId, updateDefinition);
+
+            return availableSeats;
         }
 
-
-        // Method to filter trains, calculate available seats, and calculate train fee per person
+        // Modified FilterTrainsAndCalculateAvailabilityAndFee service
         public List<Train> FilterTrainsAndCalculateAvailabilityAndFee(string fromStation, string toStation, DateTime reservationDate)
         {
             var filter = Builders<Train>.Filter
@@ -96,9 +175,9 @@ namespace Train_Reservation_System.Services.Reservations
 
                 if (fromIndex != -1 && toIndex != -1 && fromIndex < toIndex)
                 {
-                    var reservedSeats = GetReservedSeatsCount(train.Id, reservationDate);
-                    var availableSeats = train.TrainSeats - reservedSeats;
-                    train.TrainSeats = availableSeats;
+                    reservationDate = reservationDate.Date;
+                    var availableSeats = GetReservedSeatsCount(train.Id, reservationDate);
+                    train.AvailableSeats = availableSeats;
 
                     // Calculate train fee
                     var unitPrice = train.UnitPrice;
@@ -107,14 +186,17 @@ namespace Train_Reservation_System.Services.Reservations
                 }
                 else
                 {
-                    train.TrainSeats = 0; // No available seats if "from" station is after "to" station
+                    train.AvailableSeats = 0; // No available seats if "from" station is after "to" station
                 }
             }
 
             // Filter trains with available seats
-            var filteredTrains = availableTrains.Where(train => train.TrainSeats > 0).ToList();
+            var filteredTrains = availableTrains.Where(train => train.AvailableSeats > 0).ToList();
 
             return filteredTrains;
         }
+
+
+
     }
 }

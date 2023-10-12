@@ -26,6 +26,9 @@ namespace Train_Reservation_System.Models.Trains
         [BsonElement("trainSeats")]
         public int TrainSeats { get; set; }
 
+        [BsonElement("availableSeats")]
+        public int AvailableSeats { get; set; }
+
         [BsonElement("unitPrice")]
         public int UnitPrice { get; set; }
 
