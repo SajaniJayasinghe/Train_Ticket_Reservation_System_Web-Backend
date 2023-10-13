@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Train_Reservation_System.Helpers;
 using Train_Reservation_System.Models.BackOfficer;
 using Train_Reservation_System.Services.BackOfficers;
 
@@ -21,27 +22,50 @@ namespace Train_Reservation_System.Controllers.BackOfficers
         [HttpGet]
         public ActionResult<List<BackOfficer>> Get()
         {
-            return backOfficerService.Get();
+            try
+            {
+                var travelagents = backOfficerService.Get();
+                return Ok(new ApiResponse(true, 200, "Success", travelagents));
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new ApiResponse(false, 500, ex.Message, null));
+            }
         }
 
         // GET api/<BackOfficersController>/5
         [HttpGet("{id}")]
         public ActionResult<BackOfficer> Get(string id)
         {
-            var backofficer = backOfficerService.Get(id);
-            if (backofficer == null)
+            try
             {
-                return NotFound($"backofficer Agent with Id = {id} not found");
+                var travelagent = backOfficerService.Get(id);
+                if (travelagent == null)
+                {
+                    return NotFound(new ApiResponse(false, 404, $"Back Officer with Id = {id} not found", null));
+                }
+                return Ok(new ApiResponse(true, 200, "Success", travelagent));
             }
-            return backofficer;
+            catch (Exception ex)
+            {
+                return StatusCode(500, new ApiResponse(false, 500, ex.Message, null));
+            }
         }
 
         // POST api/<BackOfficersController>
         [HttpPost]
-        public ActionResult<BackOfficer> Post([FromBody] BackOfficer backofficer)
+        public ActionResult<ApiResponse> Post([FromBody] BackOfficer backofficer)
         {
-            backOfficerService.Create(backofficer);
-            return CreatedAtAction(nameof(Get), new { id = backofficer.Id }, backofficer);
+            try
+            {
+                backOfficerService.Create(backofficer);
+                return new ApiResponse(true, 201, "TravelAgent created successfully", backofficer);
+            }
+            catch (Exception ex)
+            {
+                return new ApiResponse(false, 500, "Error creating TravelAgent", ex.Message);
+            }
         }
 
         // PUT api/<BackOfficersController>/5
@@ -52,10 +76,10 @@ namespace Train_Reservation_System.Controllers.BackOfficers
 
             if (existingBackOfficer == null)
             {
-                return NotFound($"Student with Id = {id} not found");
+                return NotFound(new ApiResponse(false, 401, $"BackOfficer  with Id = {id} not found", null));
             }
             backOfficerService.Update(id, backofficer);
-            return NoContent();
+            return Ok(new ApiResponse(true, 200, "BackOfficer updated successfully", existingBackOfficer));
         }
 
         // DELETE api/<BackOfficersController>/5
@@ -65,10 +89,10 @@ namespace Train_Reservation_System.Controllers.BackOfficers
             var backofficer = backOfficerService.Get(id);
             if (backofficer == null)
             {
-                return NotFound($"BackOfficer Agent with Id = {id} not found");
+                return NotFound(new ApiResponse(false, 401, $"BackOfficer  with Id = {id} not found", null));
             }
             backOfficerService.Remove(backofficer.Id);
-            return Ok($"BackOfficer with Id = {id} deleted");
+            return Ok(new ApiResponse(true, 200, "Success", backofficer));
         }
     }
 }

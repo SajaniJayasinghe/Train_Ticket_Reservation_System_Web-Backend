@@ -1,7 +1,9 @@
-﻿using MongoDB.Driver;
+﻿using MongoDB.Bson;
+using MongoDB.Driver;
 using Train_Reservation_System.Database;
 using Train_Reservation_System.Models.TravelAgent;
 using Train_Reservation_System.Models.Travelers;
+using BCrypt.Net;
 
 namespace Train_Reservation_System.Services.TravelAgents
 {
@@ -39,10 +41,38 @@ namespace Train_Reservation_System.Services.TravelAgents
             _travelagents.DeleteOne(travelagent => travelagent.Id == id);
         }
 
+        //public void Update(string id, TravelAgent travelagent)
+        //{
+        //    _travelagents.ReplaceOne(travelagent => travelagent.Id == id, travelagent);
+        //}
+
         public void Update(string id, TravelAgent travelagent)
         {
-            _travelagents.ReplaceOne(travelagent => travelagent.Id == id, travelagent);
+            var existingTravelAgent = _travelagents.Find(agent => agent.Id == id).FirstOrDefault();
+
+            if (existingTravelAgent == null)
+            {
+                return; // Handle not found case as needed
+            }
+
+            // Check if a new password is provided
+            if (!string.IsNullOrEmpty(travelagent.PasswordHash))
+            {
+                // Hash the new password using BCrypt and update the PasswordHash property
+                existingTravelAgent.PasswordHash = BCrypt.Net.BCrypt.HashPassword(travelagent.PasswordHash);
+            }
+
+            // Update other properties as needed
+            existingTravelAgent.FullName = travelagent.FullName;
+            existingTravelAgent.Email = travelagent.Email;
+            existingTravelAgent.Role = travelagent.Role;
+            existingTravelAgent.NIC = travelagent.NIC;
+            existingTravelAgent.PhoneNumber = travelagent.PhoneNumber;
+
+            // Replace the existing document with the updated one
+            _travelagents.ReplaceOne(agent => agent.Id == id, existingTravelAgent);
         }
+
 
 
         public TravelAgent Login(string email, string password)

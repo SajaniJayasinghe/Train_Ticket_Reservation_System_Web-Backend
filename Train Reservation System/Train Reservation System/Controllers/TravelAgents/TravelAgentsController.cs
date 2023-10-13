@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Train_Reservation_System.Helpers;
 using Train_Reservation_System.Models.TravelAgent;
 using Train_Reservation_System.Models.TravelAgents;
 using Train_Reservation_System.Services.TravelAgents;
@@ -21,30 +22,51 @@ namespace Train_Reservation_System.Controllers.TravelAgents
         [HttpGet]
         public ActionResult<List<TravelAgent>> Get()
         {
-            return travelAgentService.Get();
+            try
+            {
+                var travelagents = travelAgentService.Get();
+                return Ok(new ApiResponse(true, 200, "Success", travelagents));
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new ApiResponse(false, 500, ex.Message, null));
+            }
         }
 
         // GET api/<TravelAgentsController>/5
         [HttpGet("{id}")]
         public ActionResult<TravelAgent> Get(string id)
         {
-            var travelagent = travelAgentService.Get(id);
-            if (travelagent == null)
+            try
             {
-                return NotFound($"Travel Agent with Id = {id} not found");
+                var travelagent = travelAgentService.Get(id);
+                if (travelagent == null)
+                {
+                    return NotFound(new ApiResponse(false, 404, $"Travel Agent with Id = {id} not found", null));
+                }
+                return Ok(new ApiResponse(true, 200, "Success", travelagent));
             }
-            return travelagent;
+            catch (Exception ex)
+            {
+                return StatusCode(500, new ApiResponse(false, 500, ex.Message, null));
+            }
         }
 
-        // POST api/<TravelAgentsController>
         [HttpPost]
-        public ActionResult<TravelAgent> Post([FromBody] TravelAgent travelagent)
+        public ActionResult<ApiResponse> CreateTravelAgent([FromBody] TravelAgent travelagent)
         {
-            travelAgentService.Create(travelagent);
-            return CreatedAtAction(nameof(Get), new { id = travelagent.Id }, travelagent);
+            try
+            {
+                travelAgentService.Create(travelagent);
+                return new ApiResponse(true, 201, "TravelAgent created successfully", travelagent);
+            }
+            catch (Exception ex)
+            {
+                return new ApiResponse(false, 500, "Error creating TravelAgent", ex.Message);
+            }
         }
 
-        // PUT api/<TravelAgentsController>/5
         [HttpPut("{id}")]
         public ActionResult Put(string id, [FromBody] TravelAgent travelagent)
         {
@@ -52,10 +74,12 @@ namespace Train_Reservation_System.Controllers.TravelAgents
 
             if (existingTravelAgent == null)
             {
-                return NotFound($"Student with Id = {id} not found");
+                return NotFound(new ApiResponse(false, 401, $"TravelAgent with Id = {id} not found", null));
             }
+
             travelAgentService.Update(id, travelagent);
-            return NoContent();
+
+            return Ok(new ApiResponse(true, 200, "TravelAgent updated successfully", existingTravelAgent));
         }
 
         // DELETE api/<TravelAgentsController>/5
@@ -65,10 +89,10 @@ namespace Train_Reservation_System.Controllers.TravelAgents
             var travelagent = travelAgentService.Get(id);
             if (travelagent == null)
             {
-                return NotFound($"Travel Agent with Id = {id} not found");
+                return NotFound(new ApiResponse(false, 401, $"Travel Agent with Id = {id} not found", null));
             }
             travelAgentService.Remove(travelagent.Id);
-            return Ok($"Travel Agent with Id = {id} deleted");
+            return Ok(new ApiResponse(true,200, "Success", travelagent));
         }
 
         // POST api/<TravelAgentsController>/login
@@ -78,9 +102,9 @@ namespace Train_Reservation_System.Controllers.TravelAgents
             var travelAgent = travelAgentService.Login(request.Email, request.Password);
             if (travelAgent == null)
             {
-                return NotFound("Invalid email or password");
+                return NotFound(new ApiResponse(false,401,"Invalid email or password",null));
             }
-            return Ok(travelAgent);
+            return Ok(new ApiResponse(true,200,"Success",new {TravelAgent = travelAgent}));
         }
 
 
