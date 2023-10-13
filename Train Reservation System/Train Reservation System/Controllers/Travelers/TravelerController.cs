@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Train_Reservation_System.Helpers;
+using Train_Reservation_System.Models.TravelAgent;
 using Train_Reservation_System.Models.Travelers;
+using Train_Reservation_System.Services.TravelAgents;
 using Train_Reservation_System.Services.Travelers;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -20,43 +23,67 @@ namespace Train_Reservation_System.Controllers.Travelers
         [HttpGet]
         public ActionResult<List<Traveler>> Get()
         {
-            return travelerService.Get();
+            try
+            {
+                var travelagents = travelerService.Get();
+                return Ok(new ApiResponse(true, 200, "Success", travelagents));
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new ApiResponse(false, 500, ex.Message, null));
+            }
         }
 
         // GET api/<TravelerController>/5
         [HttpGet("{nic}")]
         public ActionResult<Traveler> Get(string nic)
         {
-            var traveler = travelerService.Get(nic);
-            if (traveler == null)
+            try
             {
-                return NotFound($"Traveler with NIC = {nic} not found");
+                var traveler = travelerService.Get(nic);
+                if (traveler == null)
+                {
+                    return NotFound(new ApiResponse(false, 404, $"Traveler with NIC = {nic} not found", null));
+                }
+                return Ok(new ApiResponse(true, 200, "Success", traveler));
             }
-            return traveler;
+            catch (Exception ex)
+            {
+                return StatusCode(500, new ApiResponse(false, 500, ex.Message, null));
+            }
         }
 
         // POST api/<TravelerController>
         [HttpPost]
-        public ActionResult<Traveler> Post([FromBody] Traveler traveler)
+        public ActionResult<ApiResponse> CreateTravveler([FromBody] Traveler traveler)
         {
-            travelerService.Create(traveler);
-            return CreatedAtAction(nameof(Get), new { nic = traveler.NIC }, traveler);
+            try
+            {
+                travelerService.Create(traveler);
+                return new ApiResponse(true, 201, "Traveler created successfully", traveler);
+            }
+            catch (Exception ex)
+            {
+                return new ApiResponse(false, 500, "Error creating Traveler", ex.Message);
+            }
         }
 
         // PUT api/<TravelerController>/5
-        [HttpPut("{nic}")]
-        public ActionResult Put(string nic, [FromBody] Traveler traveler)
+        [HttpPut("{id}")]
+        public ActionResult Put(string id, [FromBody] Traveler traveler)
         {
-            var existingTraveler = travelerService.Get(nic);
+            var existingTraveler = travelerService.Get(id);
 
             if (existingTraveler == null)
             {
-                return NotFound($"Traveler with NIC = {nic} not found");
+                return NotFound(new ApiResponse(false, 401, $"Traveler with NIC = {id} not found", null));
             }
-            travelerService.Update(nic, traveler);
-            return NoContent();
-        }
 
+            travelerService.Update(id, traveler);
+
+            return Ok(new ApiResponse(true, 200, "Traveler updated successfully", existingTraveler));
+        }
         // DELETE api/<TravelerController>/5
         [HttpDelete("{nic}")]
         public ActionResult Delete(string nic)
@@ -64,10 +91,10 @@ namespace Train_Reservation_System.Controllers.Travelers
             var traveler = travelerService.Get(nic);
             if (traveler == null)
             {
-                return NotFound($"Traveler with NIC = {nic} not found");
+                return NotFound(new ApiResponse(false, 401, $"Traveler with NIC = {nic} not found", null));
             }
             travelerService.Remove(traveler.NIC);
-            return Ok($"Traveler with NIC = {nic} deleted");
+            return Ok(new ApiResponse(true, 200, "Success", traveler));
         }
 
         // POST api/<TravelerController>/login
@@ -77,23 +104,22 @@ namespace Train_Reservation_System.Controllers.Travelers
             var traveler = travelerService.Login(request.NIC, request.Password);
             if (traveler == null)
             {
-                return NotFound("Invalid NIC or password");
+                return NotFound(new ApiResponse(false, 401, "Invalid NIC or Password", null));
             }
-            return Ok(traveler);
+            return Ok(new ApiResponse(true, 200, "Success", new { Traveler = traveler }));
         }
 
-        // POST api/<TravelerController>/activate/{nic}
         [HttpPost("activate/{nic}")]
         public IActionResult Activate(string nic)
         {
             var traveler = travelerService.Get(nic);
             if (traveler == null)
             {
-                return NotFound($"Traveler with NIC = {nic} not found");
+                return Ok(new ApiResponse(false, 404, $"Traveler with NIC = {nic} not found", null));
             }
 
             travelerService.Activate(nic);
-            return Ok($"Traveler with NIC = {nic} activated");
+            return Ok(new ApiResponse(true, 200, $"Traveler with NIC = {nic} activated", null));
         }
 
         // POST api/<TravelerController>/deactivate/{nic}
@@ -104,11 +130,11 @@ namespace Train_Reservation_System.Controllers.Travelers
             var traveler = travelerService.Get(nic);
             if (traveler == null)
             {
-                return NotFound($"Traveler with NIC = {nic} not found");
+                return Ok(new ApiResponse(false, 404, $"Traveler with NIC = {nic} not found", null));
             }
 
             travelerService.Deactivate(nic);
-            return Ok($"Traveler with NIC = {nic} deactivated");
+            return Ok(new ApiResponse(true, 200, $"Traveler with NIC = {nic} dectivated", null));
         }
     }
 }
