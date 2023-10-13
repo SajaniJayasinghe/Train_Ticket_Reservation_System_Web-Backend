@@ -194,3 +194,52 @@ E:\4 th year 2 sem\Train_Ticket_Reservation_System_Web-Backend\Train Reservation
 E:\4 th year 2 sem\Train_Ticket_Reservation_System_Web-Backend\Train Reservation System\Train Reservation System\obj\Debug\net6.0\Train Reservation System.pdb
 E:\4 th year 2 sem\Train_Ticket_Reservation_System_Web-Backend\Train Reservation System\Train Reservation System\obj\Debug\net6.0\Train Reservation System.genruntimeconfig.cache
 E:\4 th year 2 sem\Train_Ticket_Reservation_System_Web-Backend\Train Reservation System\Train Reservation System\obj\Debug\net6.0\ref\Train Reservation System.dll
+C:\Users\Imasha\Desktop\EAD NEW ONE\Train_Ticket_Reservation_System_Web-Backend\Train Reservation System\Train Reservation System\bin\Debug\net6.0\appsettings.Development.json
+C:\Users\Imasha\Desktop\EAD NEW ONE\Train_Ticket_Reservation_System_Web-Backend\Train Reservation System\Train Reservation System\bin\Debug\net6.0\appsettings.json
+C:\Users\Imasha\Desktop\EAD NEW ONE\Train_Ticket_Reservation_System_Web-Backend\Train Reservation System\Train Reservation System\bin\Debug\net6.0\Train Reservation System.exe
+C:\Users\Imasha\Desktop\EAD NEW ONE\Train_Ticket_Reservation_System_Web-Backend\Train Reservation System\Train Reservation System\bin\Debug\net6.0\Train Reservation System.deps.json
+C:\Users\Imasha\Desktop\EAD NEW ONE\Train_Ticket_Reservation_System_Web-Backend\Train Reservation System\Train Reservation System\bin\Debug\net6.0\Train Reservation System.runtimeconfig.json
+C:\Users\Imasha\Desktop\EAD NEW ONE\Train_Ticket_Reservation_System_Web-Backend\Train Reservation System\Train Reservation System\bin\Debug\net6.0\Train Reservation System.dll
+C:\Users\Imasha\Desktop\EAD NEW ONE\Train_Ticket_Reservation_System_Web-Backend\Train Reservation System\Train Reservation System\bin\Debug\net6.0\Train Reservation System.pdb
+C:\Users\Imasha\Desktop\EAD NEW ONE\Train_Ticket_Reservation_System_Web-Backend\Train Reservation System\Train Reservation System\bin\Debug\net6.0\BCrypt.Net.dll
+C:\Users\Imasha\Desktop\EAD NEW ONE\Train_Ticket_Reservation_System_Web-Backend\Train Reservation System\Train Reservation System\bin\Debug\net6.0\DnsClient.dll
+C:\Users\Imasha\Desktop\EAD NEW ONE\Train_Ticket_Reservation_System_Web-Backend\Train Reservation System\Train Reservation System\bin\Debug\net6.0\Microsoft.OpenApi.dll
+C:\Users\Imasha\Desktop\EAD NEW ONE\Train_Ticket_Reservation_System_Web-Backend\Train Reservation System\Train Reservation System\bin\Debug\net6.0\MongoDB.Bson.dll
+C:\Users\Imasha\Desktop\EAD NEW ONE\Train_Ticket_Reservation_System_Web-Backend\Train Reservation System\Train Reservation System\bin\Debug\net6.0\MongoDB.Driver.dll
+C:\Users\Imasha\Desktop\EAD NEW ONE\Train_Ticket_Reservation_System_Web-Backend\Train Reservation System\Train Reservation System\bin\Debug\net6.0\MongoDB.Driver.Core.dll
+C:\Users\Imasha\Desktop\EAD NEW ONE\Train_Ticket_Reservation_System_Web-Backend\Train Reservation System\Train Reservation System\bin\Debug\net6.0\MongoDB.Libmongocrypt.dll
+C:\Users\Imasha\Desktop\EAD NEW ONE\Train_Ticket_Reservation_System_Web-Backend\Train Reservation System\Train Reservation System\bin\Debug\net6.0\SharpCompress.dll
+C:\Users\Imasha\Desktop\EAD NEW ONE\Train_Ticket_Reservation_System_Web-Backend\Train Reservation System\Train Reservation System\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\Imasha\Desktop\EAD NEW ONE\Train_Ticket_Reservation_System_Web-Backend\Train Reservation System\Train Reservation System\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\Imasha\Desktop\EAD NEW ONE\Train_Ticket_Reservation_System_Web-Backend\Train Reservation System\Train Reservation System\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\Imasha\Desktop\EAD NEW ONE\Train_Ticket_Reservation_System_Web-Backend\Train Reservation System\Train Reservation System\bin\Debug\net6.0\runtimes\linux\native\libsnappy64.so
+C:\Users\Imasha\Desktop\EAD NEW ONE\Train_Ticket_Reservation_System_Web-Backend\Train Reservation System\Train Reservation System\bin\Debug\net6.0\runtimes\linux\native\libzstd.so
+C:\Users\Imasha\Desktop\EAD NEW ONE\Train_Ticket_Reservation_System_Web-Backend\Train Reservation System\Train Reservation System\bin\Debug\net6.0\runtimes\osx\native\libsnappy64.dylib
+C:\Users\Imasha\Desktop\EAD NEW ONE\Train_Ticket_Reservation_System_Web-Backend\Train Reservation System\Train Reservation System\bin\Debug\net6.0\runtimes\osx\native\libzstd.dylib
+C:\Users\Imasha\Desktop\EAD NEW ONE\Train_Ticket_Reservation_System_Web-Backend\Train Reservation System\Train Reservation System\bin\Debug\net6.0\runtimes\win\native\libzstd.dll
+C:\Users\Imasha\Desktop\EAD NEW ONE\Train_Ticket_Reservation_System_Web-Backend\Train Reservation System\Train Reservation System\bin\Debug\net6.0\runtimes\win\native\snappy32.dll
+C:\Users\Imasha\Desktop\EAD NEW ONE\Train_Ticket_Reservation_System_Web-Backend\Train Reservation System\Train Reservation System\bin\Debug\net6.0\runtimes\win\native\snappy64.dll
+C:\Users\Imasha\Desktop\EAD NEW ONE\Train_Ticket_Reservation_System_Web-Backend\Train Reservation System\Train Reservation System\bin\Debug\net6.0\runtimes\linux\native\libmongocrypt.so
+C:\Users\Imasha\Desktop\EAD NEW ONE\Train_Ticket_Reservation_System_Web-Backend\Train Reservation System\Train Reservation System\bin\Debug\net6.0\runtimes\osx\native\libmongocrypt.dylib
+C:\Users\Imasha\Desktop\EAD NEW ONE\Train_Ticket_Reservation_System_Web-Backend\Train Reservation System\Train Reservation System\bin\Debug\net6.0\runtimes\win\native\mongocrypt.dll
+C:\Users\Imasha\Desktop\EAD NEW ONE\Train_Ticket_Reservation_System_Web-Backend\Train Reservation System\Train Reservation System\obj\Debug\net6.0\Train Reservation System.csproj.AssemblyReference.cache
+C:\Users\Imasha\Desktop\EAD NEW ONE\Train_Ticket_Reservation_System_Web-Backend\Train Reservation System\Train Reservation System\obj\Debug\net6.0\Train Reservation System.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Imasha\Desktop\EAD NEW ONE\Train_Ticket_Reservation_System_Web-Backend\Train Reservation System\Train Reservation System\obj\Debug\net6.0\Train Reservation System.AssemblyInfoInputs.cache
+C:\Users\Imasha\Desktop\EAD NEW ONE\Train_Ticket_Reservation_System_Web-Backend\Train Reservation System\Train Reservation System\obj\Debug\net6.0\Train Reservation System.AssemblyInfo.cs
+C:\Users\Imasha\Desktop\EAD NEW ONE\Train_Ticket_Reservation_System_Web-Backend\Train Reservation System\Train Reservation System\obj\Debug\net6.0\Train Reservation System.csproj.CoreCompileInputs.cache
+C:\Users\Imasha\Desktop\EAD NEW ONE\Train_Ticket_Reservation_System_Web-Backend\Train Reservation System\Train Reservation System\obj\Debug\net6.0\Train Reservation System.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Imasha\Desktop\EAD NEW ONE\Train_Ticket_Reservation_System_Web-Backend\Train Reservation System\Train Reservation System\obj\Debug\net6.0\Train Reservation System.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Imasha\Desktop\EAD NEW ONE\Train_Ticket_Reservation_System_Web-Backend\Train Reservation System\Train Reservation System\obj\Debug\net6.0\staticwebassets\msbuild.Train Reservation System.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\Imasha\Desktop\EAD NEW ONE\Train_Ticket_Reservation_System_Web-Backend\Train Reservation System\Train Reservation System\obj\Debug\net6.0\staticwebassets\msbuild.build.Train Reservation System.props
+C:\Users\Imasha\Desktop\EAD NEW ONE\Train_Ticket_Reservation_System_Web-Backend\Train Reservation System\Train Reservation System\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.Train Reservation System.props
+C:\Users\Imasha\Desktop\EAD NEW ONE\Train_Ticket_Reservation_System_Web-Backend\Train Reservation System\Train Reservation System\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.Train Reservation System.props
+C:\Users\Imasha\Desktop\EAD NEW ONE\Train_Ticket_Reservation_System_Web-Backend\Train Reservation System\Train Reservation System\obj\Debug\net6.0\staticwebassets.pack.json
+C:\Users\Imasha\Desktop\EAD NEW ONE\Train_Ticket_Reservation_System_Web-Backend\Train Reservation System\Train Reservation System\obj\Debug\net6.0\staticwebassets.build.json
+C:\Users\Imasha\Desktop\EAD NEW ONE\Train_Ticket_Reservation_System_Web-Backend\Train Reservation System\Train Reservation System\obj\Debug\net6.0\staticwebassets.development.json
+C:\Users\Imasha\Desktop\EAD NEW ONE\Train_Ticket_Reservation_System_Web-Backend\Train Reservation System\Train Reservation System\obj\Debug\net6.0\scopedcss\bundle\Train Reservation System.styles.css
+C:\Users\Imasha\Desktop\EAD NEW ONE\Train_Ticket_Reservation_System_Web-Backend\Train Reservation System\Train Reservation System\obj\Debug\net6.0\Train Reservation System.csproj.CopyComplete
+C:\Users\Imasha\Desktop\EAD NEW ONE\Train_Ticket_Reservation_System_Web-Backend\Train Reservation System\Train Reservation System\obj\Debug\net6.0\Train Reservation System.dll
+C:\Users\Imasha\Desktop\EAD NEW ONE\Train_Ticket_Reservation_System_Web-Backend\Train Reservation System\Train Reservation System\obj\Debug\net6.0\refint\Train Reservation System.dll
+C:\Users\Imasha\Desktop\EAD NEW ONE\Train_Ticket_Reservation_System_Web-Backend\Train Reservation System\Train Reservation System\obj\Debug\net6.0\Train Reservation System.pdb
+C:\Users\Imasha\Desktop\EAD NEW ONE\Train_Ticket_Reservation_System_Web-Backend\Train Reservation System\Train Reservation System\obj\Debug\net6.0\Train Reservation System.genruntimeconfig.cache
+C:\Users\Imasha\Desktop\EAD NEW ONE\Train_Ticket_Reservation_System_Web-Backend\Train Reservation System\Train Reservation System\obj\Debug\net6.0\ref\Train Reservation System.dll

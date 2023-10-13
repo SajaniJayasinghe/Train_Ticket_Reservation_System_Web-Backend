@@ -1352,19 +1352,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\DELL\\.nuget\\packages\\": {}
+    "C:\\Users\\Imasha\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\4 th year 2 sem\\Train_Ticket_Reservation_System_Web-Backend\\Train Reservation System\\Train Reservation System\\Train Reservation System.csproj",
+      "projectUniqueName": "C:\\Users\\Imasha\\Desktop\\EAD NEW ONE\\Train_Ticket_Reservation_System_Web-Backend\\Train Reservation System\\Train Reservation System\\Train Reservation System.csproj",
       "projectName": "Train Reservation System",
-      "projectPath": "E:\\4 th year 2 sem\\Train_Ticket_Reservation_System_Web-Backend\\Train Reservation System\\Train Reservation System\\Train Reservation System.csproj",
-      "packagesPath": "C:\\Users\\DELL\\.nuget\\packages\\",
-      "outputPath": "E:\\4 th year 2 sem\\Train_Ticket_Reservation_System_Web-Backend\\Train Reservation System\\Train Reservation System\\obj\\",
+      "projectPath": "C:\\Users\\Imasha\\Desktop\\EAD NEW ONE\\Train_Ticket_Reservation_System_Web-Backend\\Train Reservation System\\Train Reservation System\\Train Reservation System.csproj",
+      "packagesPath": "C:\\Users\\Imasha\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Imasha\\Desktop\\EAD NEW ONE\\Train_Ticket_Reservation_System_Web-Backend\\Train Reservation System\\Train Reservation System\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\DELL\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Imasha\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
