@@ -26,6 +26,9 @@ namespace Train_Reservation_System.Models.Trains
         [BsonElement("trainSeats")]
         public int TrainSeats { get; set; }
 
+        [BsonElement("availableSeats")]
+        public int AvailableSeats { get; set; }
+
         [BsonElement("unitPrice")]
         public int UnitPrice { get; set; }
 
@@ -44,40 +47,9 @@ namespace Train_Reservation_System.Models.Trains
             public string Time { get; set; } = "Time";
         }
 
-        // [BsonElement("trainRoute")]
-        // public string TrainRoute { get; set; } = "Train Route";
-
-        // [BsonElement("trainFare")]
-        // public string TrainFare { get; set; } = "Train Fare";
-
-        //[BsonElement("trainStatus")]
-        //public byte TrainStatus { get; set; } = 1;
-
-        //[BsonElement("trainStatus")]
-        //public bool TrainStatus { get; set; }
-
-        //[BsonElement("trainDateTime")]
-        //public DateTime TrainDateTime { get; set; }
-
-        //[BsonElement("trainPlatform")]
-        //public string TrainPlatform { get; set; } = "Train Platform";
-
-        // [BsonElement("trainArrival")]
-        //public string TrainArrival { get; set; } = "Train Arrival";
-
-        //[BsonElement("trainDeparture")]
-        //public string TrainDeparture { get; set; } = "Train Departure";
-
-        //[BsonElement("trainDistance")]
-        // public string TrainDistance { get; set; } = "Train Distance";
-
-        // [BsonElement("trainDuration")]
-        //public string TrainDuration { get; set; } = "Train Duration";
-
-        //[BsonElement("trainStationName")]
-        //public string TrainStationName { get; set; } = "Train Station Name";
     }
 }
+
 
 
 
