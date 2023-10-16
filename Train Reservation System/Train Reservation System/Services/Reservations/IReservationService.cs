@@ -14,6 +14,9 @@ namespace Train_Reservation_System.Services.Reservations
         int GetByTrain(string trainId);
         List<Train> FilterTrainsAndCalculateAvailabilityAndFee(string fromStation, string toStation, DateTime reservationDate);
         int GetReservedSeatsCount(string trainId, DateTime reservationDate);
+        List<Reservation> GetExistingReservationsByNIC(string nic);
+        List<Reservation> GetReservationHistoryByNIC(string nic);
+
     }
 }
 
