@@ -1,8 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MongoDB.Driver;
 using System.Diagnostics;
+using Train_Reservation_System.Helpers;
 using Train_Reservation_System.Models.Reservations;
 using Train_Reservation_System.Models.Trains;
+using Train_Reservation_System.Models.TravelAgent;
+using Train_Reservation_System.Models.Travelers;
 using Train_Reservation_System.Services.Reservations;
+using Train_Reservation_System.Services.Travelers;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -18,28 +23,46 @@ namespace Train_Reservation_System.Controllers.Reservations
         {
             this.reservationService = reservationService;
         }
+    
         // GET: api/<ReservationsController>
         [HttpGet]
         public ActionResult<List<Reservation>> Get()
         {
-            return reservationService.Get();
+            try
+            {
+                var reservations = reservationService.Get();
+                return Ok(new ApiResponse(true, 200, "Success", reservations));
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new ApiResponse(false, 500, ex.Message, null));
+            }
         }
+
 
         // GET api/<ReservationsController>/5
         [HttpGet("{id}")]
         public ActionResult<Reservation> Get(string id)
         {
-            var reservation = reservationService.Get(id);
-            if (reservation == null)
+            try
             {
-                return NotFound($"Reservation with Id = {id} not found");
+                var reservation = reservationService.Get(id);
+                if (reservation == null)
+                {
+                    return NotFound(new ApiResponse(false, 404, $"Reservation with ID = {id} not found", null));
+                }
+                return Ok(new ApiResponse(true, 200, "Success", reservation));
             }
-            return reservation;
+            catch (Exception ex)
+            {
+                return StatusCode(500, new ApiResponse(false, 500, ex.Message, null));
+            }
         }
 
 
         [HttpPost]
-        public ActionResult<Reservation> Post([FromBody] Reservation reservation)
+        public ActionResult<ApiResponse> Post([FromBody] Reservation reservation)
         {
             try
             {
@@ -62,49 +85,38 @@ namespace Train_Reservation_System.Controllers.Reservations
                 {
                     return BadRequest("Maximum 4 reservations allowed per NIC.");
                 }
-                Console.WriteLine(reservation.FromStation);
-                // Perform train filtering based on fromStation, toStation, reservationDate
-                string fromStation = reservation.FromStation;
-                string toStation = reservation.ToStation;
-                DateTime reservationDate = reservation.ReservationDate;
-
-                // Log before calling FilterTrainsAndCalculateAvailabilityAndFee
-                Console.WriteLine("Before calling FilterTrainsAndCalculateAvailabilityAndFee");
-
-                // Call FilterTrainsAndCalculateAvailabilityAndFee
-                List<Train> filteredTrains = reservationService.FilterTrainsAndCalculateAvailabilityAndFee(
-                    fromStation, toStation, reservationDate);
-
-                // Log after calling FilterTrainsAndCalculateAvailabilityAndFee
-                Console.WriteLine("After calling FilterTrainsAndCalculateAvailabilityAndFee");
-
-
-                // Log the filtered trains for debugging purposes
-                Console.WriteLine("Filtered Trains:");
-                foreach (var train in filteredTrains)
-                {
-                    Console.WriteLine($"Train ID: {train.Id}, Train Name: {train.TrainName}, Available Seats: {train.TrainSeats}, Fee: {train.Fee}");
-                }
-
-                // Check if a train is selected by the user (you need to implement this logic)
-                if (string.IsNullOrWhiteSpace(reservation.Train))
-                {
-                    return BadRequest("Please select a train.");
-                }
-
+                
                 // If a train is selected, create the reservation
                 reservationService.Create(reservation);
-                return CreatedAtAction(nameof(Get), new { id = reservation.Id },  filteredTrains);
+                return new ApiResponse(true, 201, "Reservation created successfully", reservation);
             }
             catch (Exception ex)
             {
-                // Log and handle any exceptions here
-                Console.WriteLine($"Error creating reservation: {ex.StackTrace}");
-                return StatusCode(500, "An error occurred while creating the reservation.");
+                
+                return new ApiResponse(false, 500, "Error creating Reservation", ex.Message);
             }
         }
 
+        [HttpGet("filterTrains")]
+        public ActionResult<List<Train>> FilterTrainsAndCalculateAvailabilityAndFee(
+     [FromQuery] string fromStation,
+     [FromQuery] string toStation,
+     [FromQuery] DateTime reservationDate)
 
+
+        {
+            try
+            {
+                reservationDate = reservationDate.Date;
+                var filteredTrains = reservationService.FilterTrainsAndCalculateAvailabilityAndFee(fromStation, toStation, reservationDate);
+                return Ok(new ApiResponse(true, 200, "Success", filteredTrains));
+            }
+            catch (Exception ex)
+            {
+                // Handle exceptions and return an appropriate error response
+                return StatusCode(500, new ApiResponse(false, 500, ex.Message, null));
+            }
+        }
 
 
         // PUT api/<ReservationsController>/5
@@ -115,7 +127,7 @@ namespace Train_Reservation_System.Controllers.Reservations
 
             if (existingReservation == null)
             {
-                return NotFound($"Reservation with Id = {id} not found");
+                return NotFound(new ApiResponse(false, 401, $"Reservation with ID = {id} not found", null));
             }
 
             // Ensure that reservations can be updated at least 5 days before the reservation date
@@ -126,8 +138,9 @@ namespace Train_Reservation_System.Controllers.Reservations
             }
 
             reservationService.Update(id, reservation);
-            return NoContent();
+            return Ok(new ApiResponse(true, 200, "Reservation updated successfully", existingReservation));
         }
+
 
         // DELETE api/<ReservationsController>/5
         [HttpDelete("{id}")]
@@ -136,7 +149,7 @@ namespace Train_Reservation_System.Controllers.Reservations
             var reservation = reservationService.Get(id);
             if (reservation == null)
             {
-                return NotFound($"Reservation with Id = {id} not found");
+                return NotFound(new ApiResponse(false, 401, $"Reservation with ID = {id} not found", null));
             }
 
             // Ensure that reservations can be canceled at least 5 days before the reservation date
@@ -147,7 +160,9 @@ namespace Train_Reservation_System.Controllers.Reservations
             }
 
             reservationService.Remove(reservation.Id);
-            return Ok($"Reservation with Id = {id} deleted");
+            return Ok(new ApiResponse(true, 200, "Success", reservation));
         }
     }
 }
+
+
