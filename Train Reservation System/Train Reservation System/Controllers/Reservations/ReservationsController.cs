@@ -162,6 +162,41 @@ namespace Train_Reservation_System.Controllers.Reservations
             reservationService.Remove(reservation.Id);
             return Ok(new ApiResponse(true, 200, "Success", reservation));
         }
+
+        //get existing reservations
+        [HttpGet("getExistingByNIC/{nic}")]
+        public ActionResult<List<Reservation>> GetExistingReservationsByNIC(string nic)
+        {
+            try
+            {
+                var reservations = reservationService.GetExistingReservationsByNIC(nic);
+                return Ok(new ApiResponse(true, 200, "Success", reservations));
+            }
+            catch (Exception ex)
+            {
+                // Handle exceptions and return an appropriate error response
+                return StatusCode(500, new ApiResponse(false, 500, ex.Message, null));
+            }
+        }
+
+        //get history reservations
+        [HttpGet("getHistoryByNIC/{nic}")]
+        public ActionResult<List<Reservation>> GetReservationHistoryByNIC(string nic)
+        {
+            try
+            {
+                var reservationHistory = reservationService.GetReservationHistoryByNIC(nic);
+                return Ok(new ApiResponse(true, 200, "Success", reservationHistory));
+            }
+            catch (Exception ex)
+            {
+                // Handle exceptions and return an appropriate error response
+                return StatusCode(500, new ApiResponse(false, 500, ex.Message, null));
+            }
+        }
+
+
+
     }
 }
 

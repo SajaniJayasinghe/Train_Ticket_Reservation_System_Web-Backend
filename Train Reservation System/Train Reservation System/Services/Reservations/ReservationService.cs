@@ -133,6 +133,26 @@ namespace Train_Reservation_System.Services.Reservations
             return filteredTrains;
         }
 
+        public List<Reservation> GetExistingReservationsByNIC(string nic)
+        {
+
+            var currentDate = DateTime.Now;
+            var filter = Builders<Reservation>.Filter.Where(r => r.NIC == nic && r.ReservationDate >= currentDate);
+
+            return _reservations.Find(filter).ToList();
+        }
+
+
+        public List<Reservation> GetReservationHistoryByNIC(string nic)
+        {
+            var currentDate = DateTime.Now;
+            var filter = Builders<Reservation>.Filter.Where(r => r.NIC == nic && r.ReservationDate < currentDate);
+
+            return _reservations.Find(filter).ToList();
+        }
+
+
+
 
 
     }
